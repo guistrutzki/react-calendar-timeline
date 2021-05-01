@@ -411,7 +411,7 @@ export default class ReactCalendarTimeline extends Component {
         )
       )
     }
-    
+
     return derivedState
   }
 
@@ -577,9 +577,15 @@ export default class ReactCalendarTimeline extends Component {
   }
 
   selectItem = (item, clickType, e) => {
+    console.log({
+      item,
+      clickType,
+      e,
+      itemTouchSendsClick: this.props.itemTouchSendsClick
+    })
     if (
       this.isItemSelected(item) ||
-      (this.props.itemTouchSendsClick && clickType === 'touch')
+      (this.props.itemTouchSendsClick)
     ) {
       if (item && this.props.onItemClick) {
         const time = this.timeFromItemEvent(e)
@@ -871,13 +877,13 @@ export default class ReactCalendarTimeline extends Component {
 
   /**
    * check if child of type TimelineHeader
-   * refer to for explanation https://github.com/gaearon/react-hot-loader#checking-element-types 
+   * refer to for explanation https://github.com/gaearon/react-hot-loader#checking-element-types
    */
   isTimelineHeader = (child) => {
     if(child.type === undefined) return false
     return child.type.secretKey ===TimelineHeaders.secretKey
   }
-  
+
   childrenWithProps(
     canvasTimeStart,
     canvasTimeEnd,
